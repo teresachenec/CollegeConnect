@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
 # Create your views here.
+
+# Views related to user login
 class LoginView(auth_views.LoginView):
 	template_name = 'login.html'
 
