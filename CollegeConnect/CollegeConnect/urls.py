@@ -22,4 +22,6 @@ urlpatterns = [
 	path('login', views.LoginView.as_view(), name = 'login'),
 	path('logout', views.LogoutView.as_view(), name = 'logout'),
 	path('password_reset', views.PasswordResetView.as_view(), name = 'password_reset'),
+	path('home', views.CCHomeView.as_view(), name = 'home'),
+	
 ]
