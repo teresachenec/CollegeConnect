@@ -22,7 +22,7 @@ class CCHomeView(TemplateView):
 
 class CCDetailView(DetailView):
     model = User
-	class CCCreateView(UpdateView):
+class CCCreateView(UpdateView):
 	model = User
 
 class CCListView(ListView):
@@ -30,5 +30,5 @@ class CCListView(ListView):
 
 class CCDeleteView(DeleteView):
     model = User
-    success_url = reverse_lazy('animal_list')
+    #success_url = reverse_lazy('home_list')
 
