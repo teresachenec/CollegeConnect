@@ -18,6 +18,17 @@ from django.urls import path
 from cc import views
 
 urlpatterns = [
+<<<<<<< HEAD
+    path('admin/', admin.site.urls, name='admin'),
+	path('login', views.LoginView.as_view(), name = 'login'),
+	path('logout', views.LogoutView.as_view(), name = 'logout'),
+	path('password_reset', views.PasswordResetView.as_view(), name = 'password_reset'),
+    path('password_reset_confirm', views.PasswordResetConfirmView.as_view(), name = 'password_reset_confirm'),
+	path('password_reset_complete', views.PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),
+	path('signup', views.signup, name = 'signup'),
+	path('home', views.CCHomeView.as_view(), name = 'home'),
+	
+=======
     path('admin/', admin.site.urls),
     path('', views.CCHomeView.as_view(), name = 'home'),
 	path('login', views.LoginView.as_view(), name = 'login'),
@@ -27,4 +38,5 @@ urlpatterns = [
 	path('password_reset_confirm', views.PasswordResetConfirmView.as_view(), name = 'password_reset_confirm'),
 	path('password_reset_complete', views.PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),
 	path('signup', views.signup, name = 'signup')
+>>>>>>> c7adcd7c6b2ec46c482043d432d0a1a28f853690
 ]
