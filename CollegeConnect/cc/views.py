@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, DetailView, ListView, DeleteView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from django.contrib import auth
+=======
+>>>>>>> c7adcd7c6b2ec46c482043d432d0a1a28f853690
 from cc.form.forms import SignUpForm
 
 # Views related to user login
@@ -63,18 +67,34 @@ class LogoutView(auth_views.LogoutView):
 	
 	next_page = reverse_lazy('/login')
 
+def signup(request):
+	if request.method == 'POST':
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			user.refresh_from_db()
+			major = form.cleaned_data.get('major')
+			interst = form.cleaned_data.get('interest')
+			username = form.cleaned_data.get('username')
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=username, password=raw_password)
+			login(request, user)
+			return redirect('home')
+	else:
+		form = SignUpForm()
+	return render(request, 'signup.html', {'form': form})
+
 # Template views
 class CCHomeView(TemplateView):
-    template_name = "index.html"
+	template_name = "index.html"
 
 class CCDetailView(DetailView):
-    model = User
+	model = User
 	# class CCCreateView(UpdateView):
 	# model = User
 
 class CCListView(ListView):
-    model = User
+	model = User
 
 class CCDeleteView(DeleteView):
-    model = User
-    #success_url = reverse_lazy('home_list')
+	model = User
