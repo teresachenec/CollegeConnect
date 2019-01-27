@@ -125,8 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # When logged in, redirect to this url
-<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/'
 =======
-LOGIN_REDIRECT_URL = '/'
->>>>>>> c7adcd7c6b2ec46c482043d432d0a1a28f853690
+LOGIN_REDIRECT_URL = '/dashboard'
+>>>>>>> 13e07a5cc4dce69d770629cd1d45587b68d40b58

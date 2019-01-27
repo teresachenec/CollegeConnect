@@ -4,10 +4,9 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-<<<<<<< HEAD
-from django.contrib import auth
 =======
->>>>>>> c7adcd7c6b2ec46c482043d432d0a1a28f853690
+from cc.models import CollegeConnect
+>>>>>>> 13e07a5cc4dce69d770629cd1d45587b68d40b58
 from cc.form.forms import SignUpForm
 
 # Views related to user login
@@ -60,11 +59,11 @@ class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
 
 class LogoutView(auth_views.LogoutView):
 	template_name = 'logout.html'
-	
+
 	def logout(request):
 		auth.logout(request)
 		return render(request, 'logout.html')
-	
+
 	next_page = reverse_lazy('/login')
 
 def signup(request):
@@ -89,10 +88,15 @@ class CCHomeView(TemplateView):
 	template_name = "index.html"
 
 class CCDetailView(DetailView):
+	model = CollegeConnect
+	print(model)
+	print(model.profile)
 	template_name = 'cc_detail_view.html'
-	model = User
-	# class CCCreateView(UpdateView):
-	# model = User
+
+	def get_object(self, queryset):
+		obj = super.get_object(queryset)
+		print(obj)
+		return obj
 
 class CCListView(ListView):
 	model = User

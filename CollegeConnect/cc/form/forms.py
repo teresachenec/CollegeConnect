@@ -13,7 +13,7 @@ class SignUpForm(UserCreationForm):
 	last_name = forms.CharField(max_length=30, required=True, help_text='Ex: "Doe"')
 	email = forms.EmailField(max_length=254, required=True, help_text='Ex: "jdoe@realuniversity.edu"')
 	major = forms.CharField(max_length=30, required=True, help_text='Ex: "BS Computer Science"')
-	interest = forms.CharField(required=True, help_text='Ex: "I love hiking, swimming, and programming!"')
+	interest = forms.CharField(required=False, help_text='Ex: "I love hiking, swimming, and programming!"')
 
 	class Meta:
 		model = User
