@@ -30,4 +30,4 @@ class CCListView(ListView):
 
 class CCDeleteView(DeleteView):
     model = User
-    #success_url = reverse_lazy('home_list')
+    
