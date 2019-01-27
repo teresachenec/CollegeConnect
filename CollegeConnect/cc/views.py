@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, DetailView, ListView, DeleteView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from cc.form.forms import SignUpForm
 
 # Views related to user login
 class LoginView(auth_views.LoginView):
@@ -12,22 +13,44 @@ class PasswordResetView(auth_views.PasswordResetView):
 	template_name = 'password_reset.html'
 	success_url = reverse_lazy('/login')
 
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+	template_name = 'password_reset_confirm.html'
+
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+	template_name = 'password_reset_complete.html'
+
 class LogoutView(auth_views.LogoutView):
 	template_name = 'logout.html'
 	next_page = reverse_lazy('/login')
 
+def signup(request):
+	if request.method == 'POST':
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			form.save()
+			user.refresh_from_db()
+			major = form.get('major')
+			interst = form.get('interest')
+			username = form.cleaned_data.get('username')
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=username, password=raw_password)
+			login(request, user)
+			return redirect('home')
+	else:
+		form = SignUpForm()
+	return render(request, 'signup.html', {'form': form})
+
 # Template views
 class CCHomeView(TemplateView):
-    template_name = "index.html"
+	template_name = "index.html"
 
 class CCDetailView(DetailView):
-    model = User
+	model = User
 	# class CCCreateView(UpdateView):
 	# model = User
 
 class CCListView(ListView):
-    model = User
+	model = User
 
 class CCDeleteView(DeleteView):
-    model = User
-    
+	model = User
