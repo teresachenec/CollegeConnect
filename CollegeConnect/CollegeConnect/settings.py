@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'cc',
-	'annoying'
+	'annoying',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# When logged in, redirect to this url
+LOGIN_REDIRECT_URL = '/'
