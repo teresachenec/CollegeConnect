@@ -18,11 +18,11 @@ from django.urls import path
 from cc import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.CCHomeView.as_view(), name = 'home'),
+	path('admin/', admin.site.urls),
+	path('', views.CCHomeView.as_view(), name = 'home'),
+	path('dashboard/<int:pk>', views.CCDetailView.as_view(), name = 'cc_detail_view'),
 	path('login', views.LoginView.as_view(), name = 'login'),
 	path('logout', views.LogoutView.as_view(), name = 'logout'),
-	path('dashboard', views.CCDetailView.as_view(). name = 'cc_detail_view'),
 	path('password_reset', views.PasswordResetView.as_view(), name = 'password_reset'),
 	path('password_reset_confirm', views.PasswordResetConfirmView.as_view(), name = 'password_reset_confirm'),
 	path('password_reset_complete', views.PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),

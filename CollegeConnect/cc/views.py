@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from cc.models import CollegeConnect
 from cc.form.forms import SignUpForm
 
 # Views related to user login
@@ -46,10 +47,15 @@ class CCHomeView(TemplateView):
 	template_name = "index.html"
 
 class CCDetailView(DetailView):
+	model = CollegeConnect
+	print(model)
+	print(model.profile)
 	template_name = 'cc_detail_view.html'
-	model = User
-	# class CCCreateView(UpdateView):
-	# model = User
+
+	def get_object(self, queryset):
+		obj = super.get_object(queryset)
+		print(obj)
+		return obj
 
 class CCListView(ListView):
 	model = User
