@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, DetailView, ListView, DeleteView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from cc.form.forms import SignUpForm
@@ -27,10 +28,10 @@ def signup(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
-			form.save()
+			user = form.save()
 			user.refresh_from_db()
-			major = form.get('major')
-			interst = form.get('interest')
+			major = form.cleaned_data.get('major')
+			interst = form.cleaned_data.get('interest')
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
